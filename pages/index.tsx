@@ -13,14 +13,14 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Red Panda</title>
+        <title>Read Panda</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <RoundPort>
         <div className="w-full h-full flex flex-col justify-center">
           <div className="my-8">
             <h1 className="text-3xl text-panda text-center font-bold">
-              Welcome to Red Panda!
+              Welcome to Read Panda!
             </h1>
             <p className="text-3xl text-panda text-center font-bold">
               {`Are you ready to learn some words?`}

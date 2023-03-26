@@ -29,7 +29,7 @@ function GradePicker(props: { word?: string }) {
   }
 
   return (
-    <div className="my-8">
+    <div className="my-4">
       <div className="my-4 flex flex-row items-center justify-center">
         <Image
           src="/pandawalk.png"

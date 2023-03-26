@@ -5,6 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import BigRedLink from "@/components/BigRedLink";
+import RoundPort from "@/components/RoundPort";
 
 const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
   fetch(input, init).then((res) => res.json());
@@ -27,7 +28,9 @@ function GradePicker(props: { word?: string }) {
 
   return (
     <div>
-      <h1>What grade are you in?</h1>
+      <h1 className="text-3xl text-panda text-center font-bold">
+        What grade are you in?
+      </h1>
       <div className="grid grid-cols-3 grid-rows-2 gap-4">
         <BigRedLink href={`${urlPrefix}K`}>Kindergarten</BigRedLink>
         <BigRedLink href={`${urlPrefix}1`}>1st</BigRedLink>
@@ -52,7 +55,11 @@ export default function Grade() {
   );
 
   if (typeof word !== "string" || wordGradeError) {
-    return <GradePicker />;
+    return (
+      <RoundPort>
+        <GradePicker />
+      </RoundPort>
+    );
   }
 
   if (!wordGrade) {
@@ -60,9 +67,9 @@ export default function Grade() {
   }
 
   return (
-    <div>
+    <RoundPort>
       <WordLevel word={word} wordGrade={wordGrade} />
       <GradePicker />
-    </div>
+    </RoundPort>
   );
 }

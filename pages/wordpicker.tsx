@@ -6,6 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import BigRedLink from "@/components/BigRedLink";
+import RoundPort from "@/components/RoundPort";
 
 const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
   fetch(input, init).then((res) => res.json());
@@ -59,7 +60,7 @@ export default function WordPicker() {
   }
 
   return (
-    <div>
+    <RoundPort>
       <h1 className="text-3xl text-panda text-center font-bold">{heading}</h1>
       <div className="grid grid-cols-3 grid-rows-2 gap-4">
         {words.map((word) => (
@@ -68,7 +69,7 @@ export default function WordPicker() {
           </BigRedLink>
         ))}
       </div>
-    </div>
+    </RoundPort>
   );
 
   return <div></div>;

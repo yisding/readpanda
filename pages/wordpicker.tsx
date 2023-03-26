@@ -8,6 +8,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import BigRedLink from "@/components/BigRedLink";
 import RoundPort from "@/components/RoundPort";
 import Header from "@/components/Header";
+import { mapGradeToText } from "@/utils";
 
 const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
   fetch(input, init).then((res) => res.json());
@@ -67,7 +68,7 @@ export default function WordPicker() {
   if (phonemeSpecific) {
     heading = `Words with ${characters} (${phoneme} sound)`;
   } else {
-    heading = `Grade ${grade} Words`;
+    heading = `${mapGradeToText(grade)} Words`;
   }
 
   return (

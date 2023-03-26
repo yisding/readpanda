@@ -8,6 +8,7 @@ import BigRedLink from "@/components/BigRedLink";
 import RoundPort from "@/components/RoundPort";
 import Header from "@/components/Header";
 import Image from "next/image";
+import { mapGradeToText } from "@/utils";
 
 const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
   fetch(input, init).then((res) => res.json());
@@ -15,7 +16,7 @@ const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
 function WordLevel(props: { word: string; wordGrade: string }) {
   return (
     <div className="text-3xl text-panda text-center font-bold">
-      The word {props.word} is a grade {props.wordGrade} word!
+      The word {props.word} is a {mapGradeToText(props.wordGrade)} word!
     </div>
   );
 }

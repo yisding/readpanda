@@ -64,7 +64,7 @@ export default function WordPicker() {
   let heading;
 
   if (phonemeSpecific) {
-    heading = `Words with ${characters} (${phoneme})`;
+    heading = `Words with ${characters} (${phoneme} sound)`;
   } else {
     heading = `Grade ${grade} Words`;
   }

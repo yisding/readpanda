@@ -25,7 +25,7 @@ export default function Word() {
     )}&grade=${encodeURIComponent(grade)}`;
   }
 
-  const { data: pieces, error: piecesError } = useSWR(url, fetcher);
+  const { data: piecesResponse, error: piecesError } = useSWR(url, fetcher);
 
   if (!validInput) {
     return <div>Error: Need a word and grade.</div>;
@@ -35,7 +35,7 @@ export default function Word() {
     return <div>API error</div>;
   }
 
-  if (!pieces) {
+  if (!piecesResponse) {
     return (
       <RoundPort>
         <Skeleton />
@@ -43,9 +43,17 @@ export default function Word() {
     );
   }
 
+  if (piecesResponse.error) {
+    return <div>API error</div>;
+  }
+
   return (
     <RoundPort>
-      <WordHero word={word} pieces={pieces}></WordHero>
+      <WordHero
+        grade={grade}
+        word={word}
+        pieces={piecesResponse.pieces}
+      ></WordHero>
     </RoundPort>
   );
 }

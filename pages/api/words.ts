@@ -14,20 +14,59 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { grade } = req.query;
+  const { grade, phoneme, characters } = req.query;
 
-  const messages: ChatCompletionRequestMessage[] = [
-    {
-      role: "system",
-      content:
-        "Output a JSON list of 9 new words at the appropriate reading grade level.",
-    },
-    {
-      role: "user",
-      content: `Reading Grade level: ${grade}
+  let messages: ChatCompletionRequestMessage[];
+
+  if (phoneme && characters) {
+    messages = [
+      {
+        role: "system",
+        content: `Output only a JSON list of up to 9 words where this string of characters makes this phoneme sequence. Do not transpose the characters or phonemes.
+
+Use this format:
+Characters: dan
+Phoneme: dæn
+Reading Grade Level: 4
+Output: ["dancer", "bandana", "dandelion", "dandruff", "dandy", "dangle", "dangling"]
+
+Characters: tee
+Phoneme: ti
+Reading Grade Level: 4
+Output: ["teeth", "teeter", "teetering", "teeter", "teeing", "committee", "teenager", "teepee", "goatee"]
+
+Characters: y
+Phoneme: i
+Reading Grade Level: 1
+Output: ["happy", "sorry", "lucky", "cheeky", "sappy", "daffy", "dizzy", "fizzy", "fuzzy"]
+
+Characters: ck
+Phoneme: k
+Reading Grade Level: 1
+Output: ["back", "pack", "rack", "tack", "duck", "sock", "rock", "lock", "pick"]`,
+      },
+      {
+        role: "user",
+        content: `Characters: ${characters}
+Phoneme: ${phoneme}
+Reading Grade Level: ${grade}
 Output:`,
-    },
-  ];
+      },
+    ];
+  } else {
+    messages = [
+      {
+        role: "system",
+        content:
+          "Output a JSON list of 9 new words at the appropriate reading grade level.",
+      },
+      {
+        role: "user",
+        content: `Reading Grade level: ${grade}
+  Output:`,
+      },
+    ];
+  }
 
   const { data } = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
@@ -42,6 +81,8 @@ Output:`,
   });
 
   const responseJson = data.choices[0].message?.content;
+
+  console.log(responseJson);
 
   if (!responseJson) {
     res.status(503).json({ error: "No response" });

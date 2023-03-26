@@ -33,7 +33,7 @@ export default function WordPicker() {
     url = `/api/words?grade=${encodeURIComponent(grade)}`;
   }
 
-  const { data: words, error: wordsError } = useSWR(url, fetcher);
+  const { data: wordsResponse, error: wordsError } = useSWR(url, fetcher);
 
   if (!validGrade) {
     return <div>Error: Need a grade.</div>;
@@ -43,8 +43,18 @@ export default function WordPicker() {
     return <div>There was an error calling the API.</div>;
   }
 
-  if (!words) {
-    return <Skeleton />;
+  if (!wordsResponse) {
+    return (
+      <RoundPort>
+        <Skeleton />
+      </RoundPort>
+    );
+  }
+
+  let { words, error: wordsResponseError } = wordsResponse;
+
+  if (wordsResponseError) {
+    return <div>There was an error calling the API.</div>;
   }
 
   if (!Array.isArray(words)) {
@@ -56,13 +66,13 @@ export default function WordPicker() {
   if (phonemeSpecific) {
     heading = `Words with ${characters} (${phoneme})`;
   } else {
-    heading = `Grade ${grade} words`;
+    heading = `Grade ${grade} Words`;
   }
 
   return (
     <RoundPort>
       <h1 className="text-3xl text-panda text-center font-bold">{heading}</h1>
-      <div className="grid grid-cols-3 grid-rows-2 gap-4">
+      <div className="grid grid-cols-3 grid-rows-2 gap-4 font-bold">
         {words.map((word) => (
           <BigRedLink key={word} href={`/word?grade=${grade}&word=${word}`}>
             {word}

@@ -12,8 +12,8 @@ const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
 
 function WordLevel(props: { word: string; wordGrade: string }) {
   return (
-    <div>
-      The word {props.word} is at a reading level of grade {props.wordGrade}.
+    <div className="text-3xl text-panda text-center font-bold">
+      The word {props.word} is a grade {props.wordGrade} word!
     </div>
   );
 }
@@ -31,7 +31,7 @@ function GradePicker(props: { word?: string }) {
       <h1 className="text-3xl text-panda text-center font-bold">
         What grade are you in?
       </h1>
-      <div className="grid grid-cols-3 grid-rows-2 gap-4">
+      <div className="grid grid-cols-3 grid-rows-2 gap-4 font-bold">
         <BigRedLink href={`${urlPrefix}K`}>Kindergarten</BigRedLink>
         <BigRedLink href={`${urlPrefix}1`}>1st</BigRedLink>
         <BigRedLink href={`${urlPrefix}2`}>2nd</BigRedLink>
@@ -47,7 +47,7 @@ export default function Grade() {
   const router = useRouter();
   const { word, grade } = router.query;
 
-  const { data: wordGrade, error: wordGradeError } = useSWR(
+  const { data: wordGradeResponse, error: wordGradeError } = useSWR(
     typeof word === "string"
       ? `/api/wordgrade?word=${encodeURIComponent(word)}`
       : null,
@@ -62,14 +62,19 @@ export default function Grade() {
     );
   }
 
-  if (!wordGrade) {
-    return <Skeleton />;
+  if (!wordGradeResponse) {
+    return (
+      <RoundPort>
+        <Skeleton />
+      </RoundPort>
+    );
   }
 
+  const wordGrade = wordGradeResponse.grade;
   return (
     <RoundPort>
       <WordLevel word={word} wordGrade={wordGrade} />
-      <GradePicker />
+      <GradePicker word={word} />
     </RoundPort>
   );
 }

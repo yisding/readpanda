@@ -36,7 +36,11 @@ export default function Word() {
   }
 
   if (!pieces) {
-    return <Skeleton />;
+    return (
+      <RoundPort>
+        <Skeleton />
+      </RoundPort>
+    );
   }
 
   return (

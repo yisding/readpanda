@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+// @ts-ignore
+import { useSpeechSynthesis } from "react-speech-kit";
 
 export default function WordHero(props: {
   grade: string;
@@ -7,6 +9,8 @@ export default function WordHero(props: {
   pieces: { characters: string; phoneme: string }[];
   image: string;
 }) {
+  const { speak } = useSpeechSynthesis();
+
   return (
     <div className="m-8">
       <div className="flex flex-col justify-center items-center h-full">
@@ -23,6 +27,18 @@ export default function WordHero(props: {
               {props.word}
             </h1>
             <div className="flex flex-row">
+              <button
+                onClick={() => {
+                  speak({ text: props.word, rate: 0.5 });
+                }}
+              >
+                <Image
+                  src="/playsound.png"
+                  alt="play sound"
+                  height={100}
+                  width={100}
+                />
+              </button>
               {props.pieces.map((piece) => (
                 <Link
                   key={piece.characters}

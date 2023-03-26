@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         panda: "#E49393",
+        salmon: "#FFC6A6",
       },
     },
   },

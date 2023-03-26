@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import WordHero from "@/components/WordHero";
 import BigRedButton from "@/components/BigRedButton";
+import BigRedLink from "@/components/BigRedLink";
 
 export default function Home() {
   return (
@@ -29,7 +30,9 @@ export default function Home() {
               alt="red panda sitting"
             />
             <div className="flex flex-col justify-between m-4">
-              <BigRedButton>I want to learn new words</BigRedButton>
+              <BigRedLink href="/grade">
+                <span className="font-bold">I want to learn new words</span>
+              </BigRedLink>
               <BigRedButton>
                 <Image
                   src="/search.png"
@@ -38,7 +41,7 @@ export default function Home() {
                   alt="search"
                   className="inline"
                 />
-                Search a word to practice
+                <span className="font-bold">Search for a word</span>
               </BigRedButton>
             </div>
           </div>

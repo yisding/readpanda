@@ -6,6 +6,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 import BigRedLink from "@/components/BigRedLink";
 import RoundPort from "@/components/RoundPort";
+import Header from "@/components/Header";
+import Image from "next/image";
 
 const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
   fetch(input, init).then((res) => res.json());
@@ -27,11 +29,19 @@ function GradePicker(props: { word?: string }) {
   }
 
   return (
-    <div>
-      <h1 className="text-3xl text-panda text-center font-bold">
-        What grade are you in?
-      </h1>
-      <div className="grid grid-cols-3 grid-rows-2 gap-4 font-bold">
+    <div className="my-8">
+      <div className="my-4 flex flex-row items-center justify-center">
+        <Image
+          src="/pandawalk.png"
+          alt="walking panda"
+          height={314}
+          width={312}
+        />
+        <h1 className="text-4xl text-panda text-center font-bold pt-16 pl-4">
+          What grade are you in?
+        </h1>
+      </div>
+      <div className="grid grid-cols-3 grid-rows-2 gap-4 font-bold my-8">
         <BigRedLink href={`${urlPrefix}K`}>Kindergarten</BigRedLink>
         <BigRedLink href={`${urlPrefix}1`}>1st</BigRedLink>
         <BigRedLink href={`${urlPrefix}2`}>2nd</BigRedLink>
@@ -57,6 +67,7 @@ export default function Grade() {
   if (typeof word !== "string" || wordGradeError) {
     return (
       <RoundPort>
+        <Header />
         <GradePicker />
       </RoundPort>
     );
@@ -73,6 +84,7 @@ export default function Grade() {
   const wordGrade = wordGradeResponse.grade;
   return (
     <RoundPort>
+      <Header />
       <WordLevel word={word} wordGrade={wordGrade} />
       <GradePicker word={word} />
     </RoundPort>

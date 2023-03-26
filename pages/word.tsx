@@ -6,9 +6,13 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 import WordHero from "@/components/WordHero";
 import RoundPort from "@/components/RoundPort";
+import Header from "@/components/Header";
 
 const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
   fetch(input, init).then((res) => res.json());
+
+const postFetcher = (input: RequestInfo | URL, init?: RequestInit) =>
+  fetch(input, { ...init, method: "POST" }).then((res) => res.json());
 
 export default function Word() {
   const router = useRouter();
@@ -16,16 +20,27 @@ export default function Word() {
 
   const validInput = typeof word === "string" && typeof grade === "string";
 
-  let url;
+  let piecesUrl;
+  let imageUrl;
   if (!validInput) {
-    url = null;
+    piecesUrl = null;
+    imageUrl = null;
   } else {
-    url = `/api/wordpieces?word=${encodeURIComponent(
+    piecesUrl = `/api/wordpieces?word=${encodeURIComponent(
       word
     )}&grade=${encodeURIComponent(grade)}`;
+    imageUrl = `/api/image?word=${encodeURIComponent(word)}`;
   }
 
-  const { data: piecesResponse, error: piecesError } = useSWR(url, fetcher);
+  const { data: piecesResponse, error: piecesError } = useSWR(
+    piecesUrl,
+    fetcher
+  );
+
+  const { data: imageResponse, error: imageError } = useSWR(
+    imageUrl,
+    postFetcher
+  );
 
   if (!validInput) {
     return <div>Error: Need a word and grade.</div>;
@@ -49,11 +64,15 @@ export default function Word() {
 
   return (
     <RoundPort>
-      <WordHero
-        grade={grade}
-        word={word}
-        pieces={piecesResponse.pieces}
-      ></WordHero>
+      <div className="w-full h-full flex flex-col">
+        <Header />
+        <WordHero
+          grade={grade}
+          word={word}
+          pieces={piecesResponse.pieces}
+          image={imageResponse?.url ?? "/search.png"}
+        />
+      </div>
     </RoundPort>
   );
 }

@@ -21,11 +21,11 @@ export default async function handler(
     return;
   }
 
-  const { word } = req.body;
+  const { word } = req.query;
 
   const response = await openai.createImage({
     prompt: `clip art of ${word}`,
-    n: 2,
+    n: 1,
     size: "256x256",
   });
 

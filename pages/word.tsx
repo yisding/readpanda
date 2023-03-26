@@ -66,12 +66,14 @@ export default function Word() {
     <RoundPort>
       <div className="w-full h-full flex flex-col">
         <Header />
+        <div className="flex-1"></div>
         <WordHero
           grade={grade}
           word={word}
           pieces={piecesResponse.pieces}
           image={imageResponse?.url ?? "/search.png"}
         />
+        <div className="flex-1"></div>
       </div>
     </RoundPort>
   );

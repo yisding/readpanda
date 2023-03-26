@@ -8,12 +8,20 @@ export default function WordHero(props: {
   image: string;
 }) {
   return (
-    <div>
-      <div className="flex flex-col">
+    <div className="m-8">
+      <div className="flex flex-col justify-center items-center h-full">
         <div className="flex flex-row justify-center items-center">
-          <Image src={props.image} alt="panda" height={256} width={256} />
-          <div className="flex flex-col">
-            <h1 className="font-bold text-panda text-6xl">{props.word}</h1>
+          <Image
+            src={props.image}
+            alt="panda"
+            height={256}
+            width={256}
+            className="mx-8"
+          />
+          <div className="flex flex-col mx-8">
+            <h1 className="font-bold text-panda text-6xl text-center">
+              {props.word}
+            </h1>
             <div className="flex flex-row">
               {props.pieces.map((piece) => (
                 <Link

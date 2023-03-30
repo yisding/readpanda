@@ -35,8 +35,8 @@ function GradePicker(props: { word?: string }) {
         <Image
           src="/pandawalk.png"
           alt="walking panda"
-          height={314}
-          width={312}
+          height={200}
+          width={200}
         />
         <h1 className="text-4xl text-panda text-center font-bold pt-16 pl-4">
           What grade are you in?

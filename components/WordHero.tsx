@@ -17,10 +17,11 @@ export default function WordHero(props: {
         <div className="flex flex-row justify-center items-center">
           <Image
             src={props.image}
-            alt="panda"
+            alt={props.word}
             height={256}
             width={256}
             className="mx-8"
+            unoptimized
           />
           <div className="flex flex-col mx-8">
             <h1 className="font-bold text-panda text-6xl text-center">

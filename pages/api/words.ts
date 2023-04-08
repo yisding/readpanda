@@ -18,7 +18,12 @@ export default async function handler(
 
   let messages: ChatCompletionRequestMessage[];
 
-  if (phoneme && characters) {
+  let phonemeSequence = phoneme;
+  if (phoneme === "") {
+    phonemeSequence = "<silent>";
+  }
+
+  if (phonemeSequence && characters) {
     messages = [
       {
         role: "system",
@@ -43,12 +48,17 @@ Output: ["happy", "sorry", "lucky", "cheeky", "sappy", "daffy", "dizzy", "fizzy"
 Characters: ck
 Phoneme: k
 Reading Grade Level: 1
-Output: ["back", "pack", "rack", "tack", "duck", "sock", "rock", "lock", "pick"]`,
+Output: ["back", "pack", "rack", "tack", "duck", "sock", "rock", "lock", "pick"]
+
+Characters: e
+Phoneme: <silent>
+Reading Grade Level: 5
+Output: ["inspire", "voyage", "acquire", "conclave", "expanse", "forsake", "intrigue", "migrate", "subdue"]`,
       },
       {
         role: "user",
         content: `Characters: ${characters}
-Phoneme: ${phoneme}
+Phoneme: ${phonemeSequence}
 Reading Grade Level: ${grade}
 Output:`,
       },

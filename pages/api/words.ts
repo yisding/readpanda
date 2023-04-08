@@ -14,41 +14,52 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { grade, phoneme, characters } = req.query;
+  const { grade, phonemes, characters } = req.query;
 
   let messages: ChatCompletionRequestMessage[];
 
-  if (phoneme && characters) {
+  let phonemeSequence = phonemes;
+  if (phonemes === "") {
+    phonemeSequence = "<silent>";
+  }
+
+  if (phonemeSequence && characters) {
     messages = [
       {
         role: "system",
         content: `Output only a JSON list of up to 9 words where this string of characters makes this phoneme sequence. Do not transpose the characters or phonemes.
+Output only JSON.
 
 Use this format:
 Characters: dan
-Phoneme: dæn
+Phonemes: dæn
 Reading Grade Level: 4
 Output: ["dancer", "bandana", "dandelion", "dandruff", "dandy", "dangle", "dangling"]
 
 Characters: tee
-Phoneme: ti
+Phonemes: ti
 Reading Grade Level: 4
 Output: ["teeth", "teeter", "teetering", "teeter", "teeing", "committee", "teenager", "teepee", "goatee"]
 
 Characters: y
-Phoneme: i
+Phonemes: i
 Reading Grade Level: 1
 Output: ["happy", "sorry", "lucky", "cheeky", "sappy", "daffy", "dizzy", "fizzy", "fuzzy"]
 
 Characters: ck
-Phoneme: k
+Phonemes: k
 Reading Grade Level: 1
-Output: ["back", "pack", "rack", "tack", "duck", "sock", "rock", "lock", "pick"]`,
+Output: ["back", "pack", "rack", "tack", "duck", "sock", "rock", "lock", "pick"]
+
+Characters: e
+Phonemes: <silent>
+Reading Grade Level: 5
+Output: ["inspire", "voyage", "acquire", "conclave", "expanse", "forsake", "intrigue", "migrate", "subdue"]`,
       },
       {
         role: "user",
         content: `Characters: ${characters}
-Phoneme: ${phoneme}
+Phonemes: ${phonemeSequence}
 Reading Grade Level: ${grade}
 Output:`,
       },

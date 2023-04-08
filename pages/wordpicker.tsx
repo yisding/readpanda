@@ -66,7 +66,9 @@ export default function WordPicker() {
   let heading;
 
   if (phonemeSpecific) {
-    heading = `Words with ${characters} (${phonemes} sound)`;
+    heading = `Words with ${characters} (${
+      phonemes === "" ? "silent" : phonemes + " sound"
+    })`;
   } else {
     heading = `${mapGradeToText(grade)} Words`;
   }

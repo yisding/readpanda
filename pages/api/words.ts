@@ -87,7 +87,7 @@ Output:`,
   console.log(messages);
 
   const { data } = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    model: "gpt-4",
     messages,
     max_tokens: 1000,
     temperature: 0.1,

@@ -54,7 +54,12 @@ Output: ["back", "pack", "rack", "tack", "duck", "sock", "rock", "lock", "pick"]
 Characters: e
 Phonemes: <silent>
 Reading Grade Level: 5
-Output: ["inspire", "voyage", "acquire", "conclave", "expanse", "forsake", "intrigue", "migrate", "subdue"]`,
+Output: ["inspire", "voyage", "acquire", "conclave", "expanse", "forsake", "intrigue", "migrate", "subdue"]
+
+Characters: k
+Phonemes: <silent>
+Reading Grade Level: 1
+Output: ["knee", "knob", "knock", "knit", "knot", "know", "knight", "kneel", "known"]`,
       },
       {
         role: "user",

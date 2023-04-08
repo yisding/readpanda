@@ -28,7 +28,7 @@ export default function WordPicker() {
   } else if (phonemeSpecific) {
     url = `/api/words?grade=${encodeURIComponent(
       grade
-    )}&phoneme=${encodeURIComponent(phonemes)}&characters=${encodeURIComponent(
+    )}&phonemes=${encodeURIComponent(phonemes)}&characters=${encodeURIComponent(
       characters
     )}`;
   } else {

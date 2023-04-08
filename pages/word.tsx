@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -32,12 +32,12 @@ export default function Word() {
     imageUrl = `/api/image?word=${encodeURIComponent(word)}`;
   }
 
-  const { data: piecesResponse, error: piecesError } = useSWR(
+  const { data: piecesResponse, error: piecesError } = useSWRImmutable(
     piecesUrl,
     fetcher
   );
 
-  const { data: imageResponse, error: imageError } = useSWR(
+  const { data: imageResponse, error: imageError } = useSWRImmutable(
     imageUrl,
     postFetcher
   );

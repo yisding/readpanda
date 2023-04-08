@@ -54,7 +54,12 @@ Output: ["back", "pack", "rack", "tack", "duck", "sock", "rock", "lock", "pick"]
 Characters: e
 Phonemes: <silent>
 Reading Grade Level: 5
-Output: ["inspire", "voyage", "acquire", "conclave", "expanse", "forsake", "intrigue", "migrate", "subdue"]`,
+Output: ["inspire", "voyage", "acquire", "conclave", "expanse", "forsake", "intrigue", "migrate", "subdue"]
+
+Characters: k
+Phonemes: <silent>
+Reading Grade Level: 1
+Output: ["knee", "knob", "knock", "knit", "knot", "know", "knight", "kneel", "known"]`,
       },
       {
         role: "user",
@@ -79,8 +84,10 @@ Output:`,
     ];
   }
 
+  console.log(messages);
+
   const { data } = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    model: "gpt-4",
     messages,
     max_tokens: 1000,
     temperature: 0.1,

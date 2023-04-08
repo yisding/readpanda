@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -35,7 +35,10 @@ export default function WordPicker() {
     url = `/api/words?grade=${encodeURIComponent(grade)}`;
   }
 
-  const { data: wordsResponse, error: wordsError } = useSWR(url, fetcher);
+  const { data: wordsResponse, error: wordsError } = useSWRImmutable(
+    url,
+    fetcher
+  );
 
   if (!validGrade) {
     return <div>Error: Need a grade.</div>;
@@ -66,7 +69,9 @@ export default function WordPicker() {
   let heading;
 
   if (phonemeSpecific) {
-    heading = `Words with ${characters} (${phonemes} sound)`;
+    heading = `Words with ${characters} (${
+      phonemes === "" ? "silent" : phonemes + " sound"
+    })`;
   } else {
     heading = `${mapGradeToText(grade)} Words`;
   }

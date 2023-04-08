@@ -15,10 +15,10 @@ const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
 
 export default function WordPicker() {
   const router = useRouter();
-  const { phoneme, characters, grade } = router.query;
+  const { phonemes, characters, grade } = router.query;
 
   const phonemeSpecific =
-    typeof phoneme === "string" && typeof characters === "string";
+    typeof phonemes === "string" && typeof characters === "string";
 
   const validGrade = typeof grade === "string";
 
@@ -28,7 +28,7 @@ export default function WordPicker() {
   } else if (phonemeSpecific) {
     url = `/api/words?grade=${encodeURIComponent(
       grade
-    )}&phoneme=${encodeURIComponent(phoneme)}&characters=${encodeURIComponent(
+    )}&phoneme=${encodeURIComponent(phonemes)}&characters=${encodeURIComponent(
       characters
     )}`;
   } else {
@@ -66,7 +66,7 @@ export default function WordPicker() {
   let heading;
 
   if (phonemeSpecific) {
-    heading = `Words with ${characters} (${phoneme} sound)`;
+    heading = `Words with ${characters} (${phonemes} sound)`;
   } else {
     heading = `${mapGradeToText(grade)} Words`;
   }

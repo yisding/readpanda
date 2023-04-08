@@ -14,12 +14,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { grade, phoneme, characters } = req.query;
+  const { grade, phonemes, characters } = req.query;
 
   let messages: ChatCompletionRequestMessage[];
 
-  let phonemeSequence = phoneme;
-  if (phoneme === "") {
+  let phonemeSequence = phonemes;
+  if (phonemes === "") {
     phonemeSequence = "<silent>";
   }
 

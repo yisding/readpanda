@@ -44,7 +44,7 @@ export default function WordHero(props: {
                 <Link
                   key={piece.characters}
                   className="flex flex-col border-solid border-2 text-panda text-4xl m-4"
-                  href={`/wordpicker?grade=${props.grade}&word=${props.word}&phoneme=${piece.phonemes}&characters=${piece.characters}`}
+                  href={`/wordpicker?grade=${props.grade}&word=${props.word}&phonemes=${piece.phonemes}&characters=${piece.characters}`}
                 >
                   <div>{piece.characters}</div>
                   <div>{piece.phonemes}</div>

@@ -24,16 +24,17 @@ export default async function handler(
     {
       role: "system",
       content: `Split the given word into phoneme sequences no more than one syllable and 3 characters or less.
+Do not output anything except JSON.
 Use this format:
 
 Word: basic
-Output: [ { "phoneme": "beɪ", "characters": "ba" }, { "phoneme": "s", "characters": "s" }, { "phoneme": "ɪk", "characters": "ic" } ]
+Output: [ { "phonemes": "beɪ", "characters": "ba" }, { "phoneme": "s", "characters": "s" }, { "phoneme": "ɪk", "characters": "ic" } ]
 
 Word: back
-Output: [ { "phoneme": "b", "characters": "b" }, { "phoneme": "æ", "characters": "a" }, { "phoneme": "k", "characters": "ck" } ]
+Output: [ { "phonemes": "b", "characters": "b" }, { "phoneme": "æ", "characters": "a" }, { "phoneme": "k", "characters": "ck" } ]
 
 Word: blizzard
-Output: [ { "phoneme": "bli", "characters": "blɪ" }, { "phoneme": "z", "characters": "zz" }, { "phoneme": "ərd", "characters": "ard" } ]`,
+Output: [ { "phonemes": "bli", "characters": "blɪ" }, { "phoneme": "z", "characters": "zz" }, { "phoneme": "ərd", "characters": "ard" } ]`,
     },
     {
       role: "user",

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -58,7 +58,7 @@ export default function Grade() {
   const router = useRouter();
   const { word, grade } = router.query;
 
-  const { data: wordGradeResponse, error: wordGradeError } = useSWR(
+  const { data: wordGradeResponse, error: wordGradeError } = useSWRImmutable(
     typeof word === "string"
       ? `/api/wordgrade?word=${encodeURIComponent(word)}`
       : null,

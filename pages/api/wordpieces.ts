@@ -28,13 +28,13 @@ Do not output anything except JSON.
 Use this format:
 
 Word: basic
-Output: [ { "phonemes": "beɪ", "characters": "ba" }, { "phoneme": "s", "characters": "s" }, { "phoneme": "ɪk", "characters": "ic" } ]
+Output: [ { "phonemes": "beɪ", "characters": "ba" }, { "phonemes": "s", "characters": "s" }, { "phonemes": "ɪk", "characters": "ic" } ]
 
 Word: back
-Output: [ { "phonemes": "b", "characters": "b" }, { "phoneme": "æ", "characters": "a" }, { "phoneme": "k", "characters": "ck" } ]
+Output: [ { "phonemes": "b", "characters": "b" }, { "phonemes": "æ", "characters": "a" }, { "phonemes": "k", "characters": "ck" } ]
 
 Word: blizzard
-Output: [ { "phonemes": "bli", "characters": "blɪ" }, { "phoneme": "z", "characters": "zz" }, { "phoneme": "ərd", "characters": "ard" } ]`,
+Output: [ { "phonemes": "bli", "characters": "blɪ" }, { "phonemes": "z", "characters": "zz" }, { "phonemes": "ərd", "characters": "ard" } ]`,
     },
     {
       role: "user",

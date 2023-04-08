@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 // @ts-ignore
-import { useSpeechSynthesis } from "react-speech-kit";
+import { useSpeechSynthesis } from "@readpanda/react-speech-kit";
 
 export default function WordHero(props: {
   grade: string;

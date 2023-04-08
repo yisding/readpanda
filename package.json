@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@readpanda/react-speech-kit": "^4.0.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
+    "@vercel/analytics": "^0.1.11",
     "classnames": "^2.3.2",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
@@ -20,7 +22,6 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-loading-skeleton": "^3.2.0",
-    "react-speech-kit": "^3.0.1",
     "swr": "^2.1.2",
     "typescript": "5.0.2"
   },

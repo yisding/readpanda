@@ -11,7 +11,7 @@
   "dependencies": {
     "@readpanda/react-speech-kit": "^4.0.0",
     "@types/node": "18.15.11",
-    "@types/react": "18.0.31",
+    "@types/react": "18.0.32",
     "@types/react-dom": "18.0.11",
     "@vercel/analytics": "^0.1.11",
     "classnames": "^2.3.2",
@@ -30,6 +30,6 @@
     "eslint-config-prettier": "^8.8.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.7",
-    "tailwindcss": "^3.3.0"
+    "tailwindcss": "^3.3.1"
   }
 }

@@ -15,7 +15,7 @@ const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
 
 function WordLevel(props: { word: string; wordGrade: string }) {
   return (
-    <div className="text-3xl text-panda text-center font-bold">
+    <div className="text-center text-3xl font-bold text-panda">
       The word {props.word} is a {mapGradeToText(props.wordGrade)} word!
     </div>
   );
@@ -31,18 +31,19 @@ function GradePicker(props: { word?: string }) {
 
   return (
     <div className="my-4">
-      <div className="my-4 flex flex-row items-center justify-center">
+      <div className="my-4 flex flex-col items-center justify-center lg:flex-row">
         <Image
           src="/pandawalk.png"
           alt="walking panda"
-          height={200}
-          width={200}
+          height={208}
+          width={208}
+          className="h-32 w-32 lg:h-52 lg:w-52"
         />
-        <h1 className="text-4xl text-panda text-center font-bold pt-16 pl-4">
+        <h1 className="pl-4 text-center text-2xl font-bold text-panda lg:pt-16 lg:text-4xl">
           What grade are you in?
         </h1>
       </div>
-      <div className="grid grid-cols-3 grid-rows-2 gap-4 font-bold my-8">
+      <div className="my-8 grid grid-cols-2 grid-rows-3 gap-3 font-bold lg:grid-cols-3 lg:grid-rows-2 lg:gap-4">
         <BigRedLink href={`${urlPrefix}K`}>Kindergarten</BigRedLink>
         <BigRedLink href={`${urlPrefix}1`}>1st</BigRedLink>
         <BigRedLink href={`${urlPrefix}2`}>2nd</BigRedLink>

@@ -10,7 +10,7 @@ export default function BigRedButton(props: {
   return (
     <Link
       className={cx(
-        "text-white bg-panda text-2xl rounded-full p-4 text-center",
+        "rounded-full bg-panda p-3 text-center text-xl text-white lg:p-4 lg:text-2xl",
         props.className
       )}
       href={props.href}

@@ -81,10 +81,10 @@ export default function WordPicker() {
       <div className="flex flex-col">
         <Header />
         <div className="flex-1"></div>
-        <h1 className="text-3xl text-panda text-center font-bold m-4">
+        <h1 className="m-4 text-center text-3xl font-bold text-panda">
           {heading}
         </h1>
-        <div className="grid grid-cols-3 grid-rows-2 gap-4 font-bold m-8">
+        <div className="m-2 grid grid-cols-2 gap-3 placeholder:font-bold lg:m-8 lg:grid-cols-3 lg:grid-rows-3 lg:gap-4">
           {words.map((word) => (
             <BigRedLink key={word} href={`/word?grade=${grade}&word=${word}`}>
               {word}

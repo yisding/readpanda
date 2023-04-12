@@ -11,11 +11,11 @@
   "dependencies": {
     "@readpanda/react-speech-kit": "^4.0.0",
     "@types/node": "18.15.11",
-    "@types/react": "18.0.32",
+    "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",
     "@vercel/analytics": "^0.1.11",
     "classnames": "^2.3.2",
-    "eslint": "8.37.0",
+    "eslint": "8.38.0",
     "eslint-config-next": "13.2.4",
     "eventsource-parser": "^1.0.0",
     "next": "13.2.4",

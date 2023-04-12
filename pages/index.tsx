@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Read Panda</title>
+        <title>ReadPanda</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <RoundPort>

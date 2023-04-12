@@ -12,7 +12,7 @@ import {
 import Head from "next/head";
 
 interface Message {
-  role: "user" | "system";
+  role: "user" | "assistant";
   content: string;
 }
 
@@ -20,7 +20,7 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
-      role: "system",
+      role: "assistant",
       content: `Hello, I'm Emma and I'm here to help you with your tutoring today. You can say things like "What's a red panda?", "I'd like to work on fractions" or "Let's practice fourth grade reading"`,
     },
   ]);
@@ -50,7 +50,7 @@ export default function Chat() {
       throw new Error(response.statusText);
     }
 
-    setMessages((prev) => [...prev, { role: "system", content: "" }]);
+    setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
 
     const data = response.body;
     if (!data) {
@@ -108,7 +108,7 @@ export default function Chat() {
                   position: "single",
                 }}
               >
-                {message.role === "system" && (
+                {message.role === "assistant" && (
                   <Avatar src="/emily-avatar.svg" name="Emma" />
                 )}
               </Message>

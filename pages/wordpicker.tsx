@@ -8,7 +8,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import BigRedLink from "@/components/BigRedLink";
 import RoundPort from "@/components/RoundPort";
 import Header from "@/components/Header";
-import { mapGradeToText } from "@/utils";
+import { mapGradeToText } from "@/utils/text";
 
 const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
   fetch(input, init).then((res) => res.json());

@@ -16,13 +16,13 @@ export default async function handler(
 ) {
   const { grade, phonemes, characters } = req.query;
 
-  let messages: ChatCompletionRequestMessage[];
-
   let phonemeSequence = phonemes;
   if (phonemes === "") {
     phonemeSequence = "<silent>";
   }
 
+  let messages: ChatCompletionRequestMessage[];
+  let model: string;
   if (phonemeSequence && characters) {
     messages = [
       {
@@ -69,6 +69,8 @@ Reading Grade Level: ${grade}
 Output:`,
       },
     ];
+
+    model = "gpt-4";
   } else {
     messages = [
       {
@@ -82,12 +84,14 @@ Output:`,
   Output:`,
       },
     ];
+
+    model = "gpt-3.5-turbo";
   }
 
   console.log(messages);
 
   const { data } = await openai.createChatCompletion({
-    model: "gpt-4",
+    model,
     messages,
     max_tokens: 1000,
     temperature: 0.5,

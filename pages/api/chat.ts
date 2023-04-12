@@ -14,7 +14,7 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   const systemMessage = `You are a helpful assistant named Emma who's here to help elementary students learn. Today's date is ${new Date().toLocaleDateString()}.
-Please be concise in your responses!
+PLEASE BE CONCISE in your responses!
 Please use language appropriate for elementary school!`;
 
   const payload = {

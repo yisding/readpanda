@@ -9,7 +9,7 @@ export default function BigRedButton(props: {
   return (
     <button
       className={cx(
-        "rounded-full bg-panda p-3 text-center text-xl text-white lg:p-4 lg:text-2xl",
+        "rounded-full bg-panda p-3 text-center text-xl text-white lg:p-4 xl:text-2xl",
         props.className
       )}
       onClick={props.onClick}

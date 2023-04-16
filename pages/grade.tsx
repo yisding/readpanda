@@ -37,7 +37,7 @@ function GradePicker(props: { word?: string }) {
           alt="walking panda"
           height={208}
           width={208}
-          className="h-32 w-32 lg:h-52 lg:w-52"
+          className="h-32 w-32 lg:h-40 lg:w-40 xl:h-52 xl:w-52"
         />
         <h1 className="pl-4 text-center text-2xl font-bold text-panda lg:pt-16 lg:text-4xl">
           What grade are you in?

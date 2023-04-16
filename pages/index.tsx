@@ -6,9 +6,11 @@ import BigRedButton from "@/components/BigRedButton";
 import BigRedLink from "@/components/BigRedLink";
 import RoundPort from "@/components/RoundPort";
 import { useRouter } from "next/router";
+import { useRef } from "react";
 
 export default function Home() {
   const router = useRouter();
+  const searchRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
@@ -42,7 +44,12 @@ export default function Home() {
                 onClick={() => {
                   // TODO replace with ref
 
-                  document.getElementById("search")?.focus();
+                  const word = searchRef.current?.value;
+                  if (!word) {
+                    searchRef.current?.focus();
+                  } else {
+                    router.push(`/grade?word=${encodeURIComponent(word)}`);
+                  }
                 }}
               >
                 <Image
@@ -53,7 +60,7 @@ export default function Home() {
                   className="inline h-8 w-8 lg:h-16 lg:w-16"
                 />
                 <input
-                  id="search"
+                  ref={searchRef}
                   className="w-48 bg-panda font-bold placeholder-white focus:placeholder-opacity-0 focus:outline-none lg:w-96"
                   placeholder="Search for a word"
                   onKeyDown={(e) => {

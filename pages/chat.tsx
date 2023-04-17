@@ -1,15 +1,15 @@
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 
-import { useState } from "react";
 import {
-  ChatContainer,
-  Message,
-  MessageList,
-  MessageInput,
-  ConversationHeader,
   Avatar,
+  ChatContainer,
+  ConversationHeader,
+  Message,
+  MessageInput,
+  MessageList,
 } from "@chatscope/chat-ui-kit-react";
 import Head from "next/head";
+import { useState } from "react";
 
 interface Message {
   role: "user" | "assistant";

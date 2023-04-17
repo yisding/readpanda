@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
+import { Configuration, OpenAIApi } from "openai";
 
 const openai = new OpenAIApi(
   new Configuration({

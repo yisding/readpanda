@@ -1,12 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useRef } from "react";
 
-import WordHero from "@/components/WordHero";
 import BigRedButton from "@/components/BigRedButton";
 import BigRedLink from "@/components/BigRedLink";
 import RoundPort from "@/components/RoundPort";
-import { useRouter } from "next/router";
-import { useRef } from "react";
 
 export default function Home() {
   const router = useRouter();

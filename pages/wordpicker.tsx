@@ -1,14 +1,13 @@
 import { useRouter } from "next/router";
-
+import Skeleton from "react-loading-skeleton";
 import useSWRImmutable from "swr/immutable";
 
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-
 import BigRedLink from "@/components/BigRedLink";
-import RoundPort from "@/components/RoundPort";
 import Header from "@/components/Header";
+import RoundPort from "@/components/RoundPort";
 import { mapGradeToText } from "@/utils/text";
+
+import "react-loading-skeleton/dist/skeleton.css";
 
 const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
   fetch(input, init).then((res) => res.json());

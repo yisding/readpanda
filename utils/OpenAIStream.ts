@@ -1,9 +1,9 @@
 // Adapted from https://vercel.com/blog/gpt-3-app-next-js-vercel-edge-functions
 
 import {
-  createParser,
   ParsedEvent,
   ReconnectInterval,
+  createParser,
 } from "eventsource-parser";
 
 export async function OpenAIStream(payload: any) {

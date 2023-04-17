@@ -2,7 +2,7 @@
 
 Read Panda is a game which helps kids practice and learn new words.
 
-https://readpanda.vercel.app
+https://readpanda.org
 
 ## To develop run
 

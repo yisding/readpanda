@@ -23,7 +23,8 @@ export default async function handler(
   messages = [
     {
       role: "system",
-      content: `Split the given word into phoneme sequences no more than one syllable and 3 characters or less.
+      content: `Split the given word into phoneme sequences and its corresponding characters. 
+      The character letters should add up to the original word. The letter should sound like the phoneme. 
 Do not output anything except JSON.
 Use this format:
 
@@ -33,8 +34,15 @@ Output: [ { "phonemes": "beɪ", "characters": "ba" }, { "phonemes": "s", "charac
 Word: back
 Output: [ { "phonemes": "b", "characters": "b" }, { "phonemes": "æ", "characters": "a" }, { "phonemes": "k", "characters": "ck" } ]
 
-Word: blizzard
-Output: [ { "phonemes": "bli", "characters": "blɪ" }, { "phonemes": "z", "characters": "zz" }, { "phonemes": "ərd", "characters": "ard" } ]`,
+Word: moon
+Output: [ { phoneme: "m", characters: "m" }, { phoneme: "u:", characters: "oo" }, { phoneme: "n", characters: "n" } ]
+
+Word: phone
+Output: [ { phoneme: "f", characters: "ph" }, { phoneme: "əʊ", characters: "o" }, { phoneme: "n", characters: "ne" } ]
+
+Word: blue
+Output: [ { phoneme: "b", characters: "b" }, { phoneme: "l", characters: "l" }, { phoneme: "u:", characters: "ue" } ]
+`,
     },
     {
       role: "user",

@@ -9,4 +9,5 @@ https://readpanda.org
 ```
 npm install
 npm run dev
+npm install next openai
 ```

@@ -25,8 +25,9 @@ export default async function handler(
       role: "system",
       content: `Split the given word into phoneme sequences and its corresponding characters. 
       Split the word into individual letters if possible. 
-      The character letters should add up to the original word. 
-      The character should sound like the phoneme.
+      Split the word into individual letters if possible. 
+      If there are two identical letters next to each other with the same sound, group those two letters together. 
+      The character letters should add up to the original word. The character should sound like the phoneme.
 Do not output anything except JSON.
 Use this format:
 
@@ -44,12 +45,7 @@ Output: [ { phoneme: "f", characters: "ph" }, { phoneme: "əʊ", characters: "o"
 
 Word: blue
 Output: [ { phoneme: "b", characters: "b" }, { phoneme: "l", characters: "l" }, { phoneme: "u:", characters: "ue" } ]
-
-word: happy
-Output: [ { phoneme: "h", characters: "h" }, { phoneme: "æ", characters: "a" }, { phoneme: "p", characters: "pp" }, { phoneme: "i", characters: "y" } ]
-
-word: hat
-Output: [ { phoneme: "h", characters: "h" }, { phoneme: "æ", characters: "a" }, { phoneme: "t", characters: "t" } ]`,
+`,
     },
     {
       role: "user",

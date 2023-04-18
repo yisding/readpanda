@@ -46,12 +46,10 @@ Word: blue
 Output: [ { phoneme: "b", characters: "b" }, { phoneme: "l", characters: "l" }, { phoneme: "u:", characters: "ue" } ]
 
 word: happy
-Output: [ { phoneme: "h", characters: "h" }, { phoneme: "æ", characters: "a" }, { phoneme: "p", characters: "pp" }, 
-{ phoneme: "i", characters: "y" } ]
+Output: [ { phoneme: "h", characters: "h" }, { phoneme: "æ", characters: "a" }, { phoneme: "p", characters: "pp" }, { phoneme: "i", characters: "y" } ]
 
 word: hat
-Output: [ { phoneme: "h", characters: "h" }, { phoneme: "æ", characters: "a" }, { phoneme: "t", characters: "t" } ]
-`,
+Output: [ { phoneme: "h", characters: "h" }, { phoneme: "æ", characters: "a" }, { phoneme: "t", characters: "t" } ]`,
     },
     {
       role: "user",

@@ -51,7 +51,6 @@ Output: [ { phoneme: "h", characters: "h" }, { phoneme: "æ", characters: "a" },
 
 word: hat
 Output: [ { phoneme: "h", characters: "h" }, { phoneme: "æ", characters: "a" }, { phoneme: "t", characters: "t" } ]
-
 `,
     },
     {

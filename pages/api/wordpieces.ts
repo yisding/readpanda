@@ -52,8 +52,6 @@ Output: [ { phoneme: "h", characters: "h" }, { phoneme: "æ", characters: "a" },
 word: hat
 Output: [ { phoneme: "h", characters: "h" }, { phoneme: "æ", characters: "a" }, { phoneme: "t", characters: "t" } ]
 
-word: big
-Output: [ { phoneme: "b", characters: "b" }, { phoneme: "ɪ", characters: "i" }, { phoneme: "g", characters: "g" } ]
 `,
     },
     {

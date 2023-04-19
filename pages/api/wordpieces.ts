@@ -20,39 +20,58 @@ export default async function handler(
 
   let messages: ChatCompletionRequestMessage[];
 
-  messages = [
-    {
-      role: "system",
-      content: `Split the given word into phoneme sequences and its corresponding characters. 
-      Split the word into individual letters if possible. 
-      Split the word into individual letters if possible. 
-      If there are two identical letters next to each other with the same sound, group those two letters together. 
+  if (grade === 'K') {
+    messages = [
+      {
+        role: "system",
+        content: `Split the given word into phoneme sequences and its corresponding characters. 
+      Split the word into individual letters. 
       The character letters should add up to the original word. The character should sound like the phoneme.
 Do not output anything except JSON.
 Use this format:
 
 Word: basic
-Output: [ { phoneme: "b", characters: "b" }, { phoneme: "eɪ", characters: "a" }, { phoneme: "s", characters: "s" }, { phoneme: "ɪ", characters: "i" }, { phoneme: "k", characters: "c" } ]
+Output: [ { "phonemes": "b", "characters": "b" }, { "phonemes": "eɪ", "characters": "a" }, { "phonemes": "s", "characters": "s" }, { "phonemes": "ɪ", "characters": "i" }, { phoneme: "k", "characters": "c" } ]
 
-Word: back
-Output: [ { "phonemes": "b", "characters": "b" }, { "phonemes": "æ", "characters": "a" }, { "phonemes": "k", "characters": "ck" } ]
+Word: hat
+Output: [ { "phonemes": "h", "characters": "h" }, { "phonemes": "æ", "characters": "a" }, { "phonemes": "t", "characters": "t" } ]
 
-Word: moon
-Output: [ { phoneme: "m", characters: "m" }, { phoneme: "u:", characters: "oo" }, { phoneme: "n", characters: "n" } ]
+Word: pig 
 
-Word: phone
-Output: [ { phoneme: "f", characters: "ph" }, { phoneme: "əʊ", characters: "o" }, { phoneme: "n", characters: "ne" } ]
-
-Word: blue
-Output: [ { phoneme: "b", characters: "b" }, { phoneme: "l", characters: "l" }, { phoneme: "u:", characters: "ue" } ]
+Output:  [ { "phonemes": "p", characters: "p" }, { "phonemes": "ɪ", characters: "i" }, { "phonemes": "g", characters: "g" } ]
 `,
-    },
-    {
-      role: "user",
-      content: `Word: ${word}
+      },
+      {
+        role: "user",
+        content: `Word: ${word}
 Output:`,
-    },
-  ];
+      },
+    ];
+  } else {
+    messages = [
+      {
+        role: "system",
+        content: `SSplit the given word into phoneme sequences and its corresponding characters. The character letters should add up to the given word. 
+      Do not output anything except JSON.
+Use this format:
+
+Word: basic
+Output: [ { "phonemes": "beɪ", "characters": "ba" }, { "phonemes": "si", "characters": "sɪ" }, { "phonemes": "k", "characters": "c" } ]
+
+Word: wonderful
+Output: [ { "phonemes": "wʌn", "characters": "won" }, { "phonemes": "dər", "characters": "der" }, { "phonemes": "fəl", "characters": "ful" } ]
+
+Word: cheerful
+Output: [ { "phoneme: "tʃɪr", characters: "cheer" }, { phoneme: "fəl", characters: "ful" } ]
+      `,
+      },
+      {
+        role: "user",
+        content: `Word: ${word}
+Output:`,
+      },
+    ];
+  };
 
   const { data } = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",

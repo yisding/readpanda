@@ -51,7 +51,8 @@ Output:`,
     messages = [
       {
         role: "system",
-        content: `SSplit the given word into phoneme sequences and its corresponding characters. The character letters should add up to the given word. 
+        content: `Split the given word into phoneme sequences and its corresponding characters. 
+        The character letters should add up to the given word.
       Do not output anything except JSON.
 Use this format:
 
@@ -62,7 +63,13 @@ Word: wonderful
 Output: [ { "phonemes": "wʌn", "characters": "won" }, { "phonemes": "dər", "characters": "der" }, { "phonemes": "fəl", "characters": "ful" } ]
 
 Word: cheerful
-Output: [ { "phoneme: "tʃɪr", characters: "cheer" }, { phoneme: "fəl", characters: "ful" } ]
+Output: [ { "phonemes": "tʃɪr", "characters": "cheer" }, { "phonemes": "fəl", "characters": "ful" } ]
+
+Word: jump
+Output: [ { "phonemes": "dʒ", "characters": "j" }, { "phonemes": "ʌmp", "characters": "ump" } ]
+
+Word: silly
+Output:[ { "phonemes": "sɪ", "characters": "si" }, { "phonemes": "li", "characters": "lly" } ]
       `,
       },
       {

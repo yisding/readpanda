@@ -26,8 +26,8 @@ export default function Chat() {
   ]);
 
   const handleSend = async (
-    innerHTML: string,
-    textContent: string,
+    _innerHTML: string,
+    _textContent: string,
     innerText: string
   ) => {
     setLoading(true);

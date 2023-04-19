@@ -9,7 +9,7 @@ const openai = new OpenAIApi(
 
 type Data = {
   error?: string;
-  pieces?: { characters: string; phoneme: string }[];
+  pieces?: { characters: string; phonemes: string }[];
 };
 
 export default async function handler(
@@ -62,7 +62,7 @@ Output:`,
     return;
   }
 
-  const responseData: { characters: string; phoneme: string }[] =
+  const responseData: { characters: string; phonemes: string }[] =
     JSON.parse(responseJson);
 
   res.status(200).json({ pieces: responseData });

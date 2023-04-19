@@ -31,14 +31,14 @@ Do not output anything except JSON.
 Use this format:
 
 Word: basic
-Output: [ { "phonemes": "b", "characters": "b" }, { "phonemes": "eɪ", "characters": "a" }, { "phonemes": "s", "characters": "s" }, { "phonemes": "ɪ", "characters": "i" }, { phoneme: "k", "characters": "c" } ]
+Output: [ { "phonemes": "b", "characters": "b" }, { "phonemes": "eɪ", "characters": "a" }, { "phonemes": "s", "characters": "s" }, { "phonemes": "ɪ", "characters": "i" }, { "phonemes": "k", "characters": "c" } ]
 
 Word: hat
 Output: [ { "phonemes": "h", "characters": "h" }, { "phonemes": "æ", "characters": "a" }, { "phonemes": "t", "characters": "t" } ]
 
 Word: pig 
 
-Output:  [ { "phonemes": "p", characters: "p" }, { "phonemes": "ɪ", characters: "i" }, { "phonemes": "g", characters: "g" } ]
+Output:  [ { "phonemes": "p", "characters": "p" }, { "phonemes": "ɪ", characters: "i" }, { "phonemes": "g", "characters": "g" } ]
 `,
       },
       {

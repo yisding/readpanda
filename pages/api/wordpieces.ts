@@ -39,6 +39,12 @@ Output: [ { "phonemes": "h", "characters": "h" }, { "phonemes": "æ", "character
 Word: pig 
 
 Output:  [ { "phonemes": "p", "characters": "p" }, { "phonemes": "ɪ", characters: "i" }, { "phonemes": "g", "characters": "g" } ]
+
+Word: blue
+Output:  [ { "phonemes": "b", "characters": "b" }, { "phonemes": "l", characters: "l" }, { "phonemes": "u:", "characters": "ue" } ]
+
+Word: happy
+Output:  [ { "phonemes": "h", "characters": "h" }, { "phonemes": "æ", characters: "a" }, { "phonemes": "p", "characters": "pp" },{ "phonemes": "i", "characters": "y" } ]
 `,
       },
       {

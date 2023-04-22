@@ -85,7 +85,7 @@ Word: play
 Output:[ { "phonemes": "p", "characters": "p" }, { "phonemes": "leɪ", "characters": "lay" } ]
 
 Word: friend
-Output:[ { "phonemes": "f", "characters": "f" }, { "phonemes": "ɛnd", "characters": "iend" } ]
+Output:[ { "phonemes": "f", "characters": "f" }, { "phonemes": "rɛnd", "characters": "riend" } ]
       `,
       },
       {

@@ -86,6 +86,9 @@ Output:[ { "phonemes": "p", "characters": "p" }, { "phonemes": "leɪ", "characte
 
 Word: friend
 Output:[ { "phonemes": "f", "characters": "f" }, { "phonemes": "rɛnd", "characters": "riend" } ]
+
+Word: laugh
+Output: [ { "phonemes": "læ", "characters": "lau" }, { "phonemes": "f", "characters": "gh" } ]
       `,
       },
       {

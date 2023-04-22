@@ -80,6 +80,9 @@ Output:[ { "phonemes": "sɪ", "characters": "si" }, { "phonemes": "li", "charact
 
 Word: sign
 Output:[ { "phonemes": "s", "characters": "s" }, { "phonemes": "igh", "characters": "aɪ" } ]
+
+Word: play
+Output:[ { "phonemes": "p", "characters": "p" }, { "phonemes": "leɪ", "characters": "lay" } ]
       `,
       },
       {

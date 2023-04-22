@@ -77,6 +77,9 @@ Output: [ { "phonemes": "dʒ", "characters": "j" }, { "phonemes": "ʌmp", "chara
 
 Word: silly
 Output:[ { "phonemes": "sɪ", "characters": "si" }, { "phonemes": "li", "characters": "lly" } ]
+
+Word: sign
+Output:[ { "phonemes": "s", "characters": "s" }, { "phonemes": "igh", "characters": "aɪ" } ]
       `,
       },
       {

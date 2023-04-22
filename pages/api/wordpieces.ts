@@ -59,7 +59,7 @@ Output:`,
         role: "system",
         content: `Split the given word into phoneme sequences and its corresponding characters. 
         The character letters should add up to the given word. If a given word only has 4 or less letters, split it into 
-        sequences of less than 3 characters. 
+        sequences of less than 3 characters. Each character sequence should sound like the phoneme sequence.
       Do not output anything except JSON.
 Use this format:
 
@@ -83,6 +83,9 @@ Output:[ { "phonemes": "s", "characters": "s" }, { "phonemes": "igh", "character
 
 Word: play
 Output:[ { "phonemes": "p", "characters": "p" }, { "phonemes": "leɪ", "characters": "lay" } ]
+
+Word: friend
+Output:[ { "phonemes": "f", "characters": "f" }, { "phonemes": "ɛnd", "characters": "iend" } ]
       `,
       },
       {

@@ -75,12 +75,26 @@ Output:`,
     messages = [
       {
         role: "system",
-        content:
-          "Output a JSON list of 9 new words at the appropriate reading grade level.",
+        content: `Output a JSON list of 9 new words at the appropriate reading grade level.
+
+Use this format:
+
+Reading Grade Level: K
+Output: ["a", "the", ...]
+
+Reading Grade Level: 1
+Output: ["purple", "sorry", ...]
+
+Reading Grade Level: 3,
+Output: ["balloon", "riding", ...]
+
+Reading Grade Level: 11
+Output: ["undulate", "articulate", ...]
+`,
       },
       {
         role: "user",
-        content: `Reading Grade level: ${grade}
+        content: `Reading Grade Level: ${grade}
   Output:`,
       },
     ];

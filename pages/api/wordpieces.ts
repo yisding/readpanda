@@ -20,28 +20,84 @@ export default async function handler(
 
   let messages: ChatCompletionRequestMessage[];
 
-  messages = [
-    {
-      role: "system",
-      content: `Split the given word into phoneme sequences no more than one syllable and 3 characters or less.
+  if (grade === 'K') {
+    messages = [
+      {
+        role: "system",
+        content: `Split the given word into phoneme sequences and its corresponding characters. 
+      Split the word into individual letters. 
+      The character letters should add up to the original word. Each character should sound like the phoneme.
 Do not output anything except JSON.
 Use this format:
 
 Word: basic
-Output: [ { "phonemes": "beɪ", "characters": "ba" }, { "phonemes": "s", "characters": "s" }, { "phonemes": "ɪk", "characters": "ic" } ]
+Output: [ { "phonemes": "b", "characters": "b" }, { "phonemes": "eɪ", "characters": "a" }, { "phonemes": "s", "characters": "s" }, { "phonemes": "ɪ", "characters": "i" }, { "phonemes": "k", "characters": "c" } ]
 
-Word: back
-Output: [ { "phonemes": "b", "characters": "b" }, { "phonemes": "æ", "characters": "a" }, { "phonemes": "k", "characters": "ck" } ]
+Word: hat
+Output: [ { "phonemes": "h", "characters": "h" }, { "phonemes": "æ", "characters": "a" }, { "phonemes": "t", "characters": "t" } ]
 
-Word: blizzard
-Output: [ { "phonemes": "bli", "characters": "blɪ" }, { "phonemes": "z", "characters": "zz" }, { "phonemes": "ərd", "characters": "ard" } ]`,
-    },
-    {
-      role: "user",
-      content: `Word: ${word}
+Word: pig 
+
+Output:  [ { "phonemes": "p", "characters": "p" }, { "phonemes": "ɪ", characters: "i" }, { "phonemes": "g", "characters": "g" } ]
+
+Word: blue
+Output:  [ { "phonemes": "b", "characters": "b" }, { "phonemes": "l", characters: "l" }, { "phonemes": "u:", "characters": "ue" } ]
+
+Word: happy
+Output:  [ { "phonemes": "h", "characters": "h" }, { "phonemes": "æ", characters: "a" }, { "phonemes": "p", "characters": "pp" },{ "phonemes": "i", "characters": "y" } ]
+`,
+      },
+      {
+        role: "user",
+        content: `Word: ${word}
 Output:`,
-    },
-  ];
+      },
+    ];
+  } else {
+    messages = [
+      {
+        role: "system",
+        content: `Split the given word into phoneme sequences and its corresponding characters. 
+        The character letters should add up to the given word. If a given word only has 5 or less letters, split it into 
+        sequences of 3 or less characters. Each character sequence should sound like the phoneme sequence.
+      Do not output anything except JSON.
+Use this format:
+
+Word: basic
+Output: [ { "phonemes": "beɪ", "characters": "ba" }, { "phonemes": "si", "characters": "sɪ" }, { "phonemes": "k", "characters": "c" } ]
+
+Word: wonderful
+Output: [ { "phonemes": "wʌn", "characters": "won" }, { "phonemes": "dər", "characters": "der" }, { "phonemes": "fəl", "characters": "ful" } ]
+
+Word: cheerful
+Output: [ { "phonemes": "tʃɪr", "characters": "cheer" }, { "phonemes": "fəl", "characters": "ful" } ]
+
+Word: jump
+Output: [ { "phonemes": "dʒ", "characters": "j" }, { "phonemes": "ʌmp", "characters": "ump" } ]
+
+Word: silly
+Output:[ { "phonemes": "sɪ", "characters": "si" }, { "phonemes": "li", "characters": "lly" } ]
+
+Word: sign
+Output:[ { "phonemes": "s", "characters": "s" }, { "phonemes": "igh", "characters": "aɪ" } ]
+
+Word: play
+Output:[ { "phonemes": "p", "characters": "p" }, { "phonemes": "leɪ", "characters": "lay" } ]
+
+Word: friend
+Output:[ { "phonemes": "f", "characters": "f" }, { "phonemes": "rɛnd", "characters": "riend" } ]
+
+Word: laugh
+Output: [ { "phonemes": "læ", "characters": "lau" }, { "phonemes": "f", "characters": "gh" } ]
+      `,
+      },
+      {
+        role: "user",
+        content: `Word: ${word}
+Output:`,
+      },
+    ];
+  };
 
   const { data } = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",

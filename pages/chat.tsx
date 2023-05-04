@@ -92,7 +92,7 @@ export default function Chat() {
       <main className="h-full w-full">
         <ChatContainer>
           <ConversationHeader>
-            <Avatar src="/emily-avatar.svg" name="Emma" />
+            <Avatar src="/yoda-avatar.png" name="Yoda" />
             <ConversationHeader.Content
               userName="Emma"
               info="Powered by GPT-4"
@@ -109,7 +109,7 @@ export default function Chat() {
                 }}
               >
                 {message.role === "assistant" && (
-                  <Avatar src="/emily-avatar.svg" name="Emma" />
+                  <Avatar src="/yoda-avatar.png" name="Yoda" />
                 )}
               </Message>
             ))}

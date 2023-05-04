@@ -18,12 +18,7 @@ interface Message {
 
 export default function Chat() {
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: "assistant",
-      content: `Hello, I'm Emma and I'm here to help you with your tutoring today. You can say things like "What's a red panda?", "I'd like to work on fractions" or "Let's practice fourth grade reading"`,
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const handleSend = async (
     _innerHTML: string,
@@ -36,7 +31,7 @@ export default function Chat() {
     const newMessages = [...messages, message];
     setMessages(newMessages);
 
-    const response = await fetch("/api/chat", {
+    const response = await fetch("/api/yoda", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -93,10 +88,7 @@ export default function Chat() {
         <ChatContainer>
           <ConversationHeader>
             <Avatar src="/yoda-avatar.png" name="Yoda" />
-            <ConversationHeader.Content
-              userName="Emma"
-              info="Powered by GPT-4"
-            />
+            <ConversationHeader.Content userName="Yoda" info="Jedi, are you?" />
           </ConversationHeader>
           <MessageList>
             {messages.map((message, index) => (

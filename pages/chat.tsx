@@ -84,7 +84,7 @@ export default function Chat() {
         <title>ReadPanda Chat</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main className="h-full w-full">
+      <main className="h-full w-full lg:h-4/6 lg:w-4/6">
         <ChatContainer>
           <ConversationHeader>
             <Avatar src="/yoda-avatar.png" name="Yoda" />

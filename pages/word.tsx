@@ -8,6 +8,9 @@ import WordHero from "@/components/WordHero";
 
 import "react-loading-skeleton/dist/skeleton.css";
 
+import Image from "next/image";
+import Link from "next/link";
+
 const fetcher = (input: RequestInfo | URL, init?: RequestInit) =>
   fetch(input, init).then((res) => res.json());
 
@@ -65,7 +68,20 @@ export default function Word() {
   return (
     <RoundPort>
       <div className="flex h-full w-full flex-col">
-        <Header />
+        <div className="flex flex-row items-center">
+          <Link href={`/chat?word=${encodeURIComponent(word)}`}>
+            <Image
+              src="/yoda-avatar.png"
+              alt="logo"
+              height={80}
+              width={80}
+              className="h-12 w-12 lg:h-20 lg:w-20"
+            />
+          </Link>
+          <div className="mx-2 text-2xl font-bold text-panda lg:mx-4 lg:text-4xl">
+            <Link href="/">Home</Link>
+          </div>
+        </div>
         <div className="flex-1"></div>
         <WordHero
           grade={grade}

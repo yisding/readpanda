@@ -23,6 +23,7 @@ export default function Chat() {
 
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [initialSent, setInitialSent] = useState(false);
 
   const handleSend = useCallback(
     async (_innerHTML: string, _textContent: string, innerText: string) => {
@@ -82,12 +83,13 @@ export default function Chat() {
   );
 
   useEffect(() => {
-    if (word && typeof word === "string") {
+    if (word && typeof word === "string" && !initialSent) {
       if (messages.length === 0) {
         handleSend("", "", word);
+        setInitialSent(true);
       }
     }
-  }, [handleSend, messages.length, word]);
+  }, [handleSend, messages.length, word, initialSent]);
 
   return (
     <>

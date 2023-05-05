@@ -84,36 +84,42 @@ export default function Chat() {
         <title>ReadPanda Chat</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main className="h-full w-full lg:h-4/6 lg:w-4/6">
-        <ChatContainer>
-          <ConversationHeader>
-            <Avatar src="/yoda-avatar.png" name="Yoda" />
-            <ConversationHeader.Content userName="Yoda" info="Jedi, are you?" />
-          </ConversationHeader>
-          <MessageList>
-            {messages.map((message, index) => (
-              <Message
-                key={index}
-                model={{
-                  message: message.content,
-                  direction: message.role === "user" ? "outgoing" : "incoming",
-                  position: "single",
-                }}
-              >
-                {message.role === "assistant" && (
-                  <Avatar src="/yoda-avatar.png" name="Yoda" />
-                )}
-              </Message>
-            ))}
-          </MessageList>
-          <MessageInput
-            placeholder="Type message here"
-            attachButton={false}
-            onSend={handleSend}
-            sendDisabled={loading}
-          />
-        </ChatContainer>
-      </main>
+      <div className="flex h-full w-full items-center justify-center">
+        <main className="h-full w-full lg:h-5/6 lg:w-3/6">
+          <ChatContainer>
+            <ConversationHeader>
+              <Avatar src="/yoda-avatar.png" name="Yoda" />
+              <ConversationHeader.Content
+                userName="Yoda"
+                info="Jedi, are you?"
+              />
+            </ConversationHeader>
+            <MessageList>
+              {messages.map((message, index) => (
+                <Message
+                  key={index}
+                  model={{
+                    message: message.content,
+                    direction:
+                      message.role === "user" ? "outgoing" : "incoming",
+                    position: "single",
+                  }}
+                >
+                  {message.role === "assistant" && (
+                    <Avatar src="/yoda-avatar.png" name="Yoda" />
+                  )}
+                </Message>
+              ))}
+            </MessageList>
+            <MessageInput
+              placeholder="Type message here"
+              attachButton={false}
+              onSend={handleSend}
+              sendDisabled={loading}
+            />
+          </ChatContainer>
+        </main>
+      </div>
     </>
   );
 }

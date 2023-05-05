@@ -99,7 +99,7 @@ export default function Chat() {
       </Head>
       <div className="flex h-full w-full items-center justify-center">
         <main className="h-full w-full lg:h-5/6 lg:w-3/6">
-          <ChatContainer>
+          <ChatContainer className="text-3xl">
             <ConversationHeader>
               <Avatar src="/yoda-avatar.png" name="Yoda" />
               <ConversationHeader.Content

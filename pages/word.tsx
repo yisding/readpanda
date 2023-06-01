@@ -37,7 +37,11 @@ export default function Word() {
 
   const { data: piecesResponse, error: piecesError } = useSWRImmutable(
     piecesUrl,
-    fetcher
+    fetcher,
+    {
+      loadingTimeout: 15000,
+      errorRetryInterval: 20000,
+    }
   );
 
   const { data: imageResponse, error: imageError } = useSWRImmutable(

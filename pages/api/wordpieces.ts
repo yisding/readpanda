@@ -20,7 +20,7 @@ export default async function handler(
 
   let messages: ChatCompletionRequestMessage[];
 
-  if (grade === 'K') {
+  if (grade === "K") {
     messages = [
       {
         role: "system",
@@ -44,8 +44,7 @@ Word: blue
 Output:  [ { "phonemes": "b", "characters": "b" }, { "phonemes": "l", characters: "l" }, { "phonemes": "u:", "characters": "ue" } ]
 
 Word: happy
-Output:  [ { "phonemes": "h", "characters": "h" }, { "phonemes": "æ", characters: "a" }, { "phonemes": "p", "characters": "pp" },{ "phonemes": "i", "characters": "y" } ]
-`,
+Output:  [ { "phonemes": "h", "characters": "h" }, { "phonemes": "æ", characters: "a" }, { "phonemes": "p", "characters": "pp" },{ "phonemes": "i", "characters": "y" } ]`,
       },
       {
         role: "user",
@@ -58,9 +57,10 @@ Output:`,
       {
         role: "system",
         content: `Split the given word into phoneme sequences and its corresponding characters. 
-        The character letters should add up to the given word. If a given word only has 5 or less letters, split it into 
-        sequences of 3 or less characters. Each character sequence should sound like the phoneme sequence.
-      Do not output anything except JSON.
+The character letters should add up to the given word.
+If a given word only has 5 or less letters, split it into sequences of 3 or less characters.
+Each character sequence should sound like the phoneme sequence.
+Do not output anything except JSON.
 Use this format:
 
 Word: basic
@@ -85,11 +85,10 @@ Word: play
 Output:[ { "phonemes": "p", "characters": "p" }, { "phonemes": "leɪ", "characters": "lay" } ]
 
 Word: friend
-Output:[ { "phonemes": "f", "characters": "f" }, { "phonemes": "rɛnd", "characters": "riend" } ]
+Output:[ { "phonemes": "fr", "characters": "fr" }, { "phonemes": "ɛnd", "characters": "iend" } ]
 
 Word: laugh
-Output: [ { "phonemes": "læ", "characters": "lau" }, { "phonemes": "f", "characters": "gh" } ]
-      `,
+Output: [ { "phonemes": "læ", "characters": "lau" }, { "phonemes": "f", "characters": "gh" } ]`,
       },
       {
         role: "user",
@@ -97,7 +96,7 @@ Output: [ { "phonemes": "læ", "characters": "lau" }, { "phonemes": "f", "charac
 Output:`,
       },
     ];
-  };
+  }
 
   const { data } = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",

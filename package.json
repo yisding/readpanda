@@ -13,7 +13,7 @@
     "@chatscope/chat-ui-kit-styles": "^1.4.0",
     "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
     "@readpanda/react-speech-kit": "^4.0.0",
-    "@sentry/nextjs": "^7.48.0",
+    "@sentry/nextjs": "^7.55.2",
     "@types/node": "20.2.5",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",

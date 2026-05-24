@@ -1,12 +1,11 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Configuration, OpenAIApi } from "openai";
+import { OpenAI } from "openai";
 
-const openai = new OpenAIApi(
-  new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-  })
-);
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+const model = process.env.OPENAI_MODEL ?? "gpt-5.5";
 
 type Data = {
   error?: string;
@@ -19,7 +18,7 @@ export default async function handler(
 ) {
   const { word } = req.query;
 
-  const prompt = `Use this format:
+  const instructions = `Use this format:
 
 Word: <word>
 Reading Grade JSON: <JSON with field \`grade\`>
@@ -34,24 +33,31 @@ Word: instrument
 Reading Grade JSON: {"grade": "6"}
 
 Word: improbable
-Reading Grade JSON: {"grade": "6"}
+Reading Grade JSON: {"grade": "6"}`;
 
-Word: ${word}
-Reading Grade JSON:`;
-
-  const { data } = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: prompt }],
-    max_tokens: 1000,
+  const response = await openai.responses.create({
+    model,
+    instructions,
+    input: `Word: ${word}\nReading Grade JSON:`,
+    max_output_tokens: 200,
     temperature: 0.1,
-    top_p: 1,
-    presence_penalty: 0,
-    frequency_penalty: 0,
-    n: 1,
-    stream: false,
+    text: {
+      format: {
+        type: "json_schema",
+        name: "reading_grade",
+        schema: {
+          type: "object",
+          properties: {
+            grade: { type: "string" },
+          },
+          required: ["grade"],
+          additionalProperties: false,
+        },
+      },
+    },
   });
 
-  const responseJson = data.choices[0].message?.content;
+  const responseJson = response.output_text;
 
   if (!responseJson) {
     res.status(503).json({ error: "No response" });

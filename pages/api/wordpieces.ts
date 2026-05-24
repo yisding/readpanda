@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
+import { OpenAI } from "openai";
 
-const openai = new OpenAIApi(
-  new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-  })
-);
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+const model = process.env.OPENAI_MODEL ?? "gpt-5.5";
 
 type Data = {
   error?: string;
@@ -18,14 +18,11 @@ export default async function handler(
 ) {
   const { word, grade } = req.query;
 
-  let messages: ChatCompletionRequestMessage[];
+  let instructions: string;
 
   if (grade === "K") {
-    messages = [
-      {
-        role: "system",
-        content: `Split the given word into phoneme sequences and its corresponding characters. 
-      Split the word into individual letters. 
+    instructions = `Split the given word into phoneme sequences and its corresponding characters.
+      Split the word into individual letters.
       The character letters should add up to the original word. Each character should sound like the phoneme.
 Do not output anything except JSON.
 Use this format:
@@ -36,27 +33,16 @@ Output: [ { "phonemes": "b", "characters": "b" }, { "phonemes": "eɪ", "characte
 Word: hat
 Output: [ { "phonemes": "h", "characters": "h" }, { "phonemes": "æ", "characters": "a" }, { "phonemes": "t", "characters": "t" } ]
 
-Word: pig 
-
+Word: pig
 Output:  [ { "phonemes": "p", "characters": "p" }, { "phonemes": "ɪ", characters: "i" }, { "phonemes": "g", "characters": "g" } ]
 
 Word: blue
 Output:  [ { "phonemes": "b", "characters": "b" }, { "phonemes": "l", characters: "l" }, { "phonemes": "u:", "characters": "ue" } ]
 
 Word: happy
-Output:  [ { "phonemes": "h", "characters": "h" }, { "phonemes": "æ", characters: "a" }, { "phonemes": "p", "characters": "pp" },{ "phonemes": "i", "characters": "y" } ]`,
-      },
-      {
-        role: "user",
-        content: `Word: ${word}
-Output:`,
-      },
-    ];
+Output:  [ { "phonemes": "h", "characters": "h" }, { "phonemes": "æ", characters: "a" }, { "phonemes": "p", "characters": "pp" },{ "phonemes": "i", "characters": "y" } ]`;
   } else {
-    messages = [
-      {
-        role: "system",
-        content: `Split the given word into phoneme sequences and its corresponding characters. 
+    instructions = `Split the given word into phoneme sequences and its corresponding characters.
 The character letters should add up to the given word.
 If a given word only has 5 or less letters, split it into sequences of 3 or less characters.
 Each character sequence should sound like the phoneme sequence.
@@ -88,29 +74,36 @@ Word: friend
 Output:[ { "phonemes": "fr", "characters": "fr" }, { "phonemes": "ɛnd", "characters": "iend" } ]
 
 Word: laugh
-Output: [ { "phonemes": "læ", "characters": "lau" }, { "phonemes": "f", "characters": "gh" } ]`,
-      },
-      {
-        role: "user",
-        content: `Word: ${word}
-Output:`,
-      },
-    ];
+Output: [ { "phonemes": "læ", "characters": "lau" }, { "phonemes": "f", "characters": "gh" } ]`;
   }
 
-  const { data } = await openai.createChatCompletion({
-    model: "gpt-4",
-    messages,
-    max_tokens: 1000,
+  const response = await openai.responses.create({
+    model,
+    instructions,
+    input: `Word: ${word}\nOutput:`,
+    max_output_tokens: 1000,
     temperature: 0.1,
-    top_p: 1,
-    presence_penalty: 0,
-    frequency_penalty: 0,
-    n: 1,
-    stream: false,
+    text: {
+      format: {
+        type: "json_schema",
+        name: "word_pieces",
+        schema: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              phonemes: { type: "string" },
+              characters: { type: "string" },
+            },
+            required: ["phonemes", "characters"],
+            additionalProperties: false,
+          },
+        },
+      },
+    },
   });
 
-  const responseJson = data.choices[0].message?.content;
+  const responseJson = response.output_text;
 
   if (!responseJson) {
     res.status(503).json({ error: "No response" });

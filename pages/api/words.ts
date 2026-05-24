@@ -1,12 +1,11 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
+import { OpenAI } from "openai";
 
-const openai = new OpenAIApi(
-  new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-  })
-);
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+const model = process.env.OPENAI_MODEL ?? "gpt-5.5";
 
 type Data = { error?: string; words?: string[] };
 
@@ -21,13 +20,11 @@ export default async function handler(
     phonemeSequence = "<silent>";
   }
 
-  let messages: ChatCompletionRequestMessage[];
-  let model: string;
+  let instructions: string;
+  let input: string;
+
   if (phonemeSequence && characters) {
-    messages = [
-      {
-        role: "system",
-        content: `Output only a JSON list of up to 9 words where this string of characters makes this phoneme sequence. Do not transpose the characters or phonemes.
+    instructions = `Output only a JSON list of up to 9 words where this string of characters makes this phoneme sequence. Do not transpose the characters or phonemes.
 Output only JSON.
 
 Use this format:
@@ -59,23 +56,14 @@ Output: ["inspire", "voyage", "acquire", "conclave", "expanse", "forsake", "intr
 Characters: k
 Phonemes: <silent>
 Reading Grade Level: 1
-Output: ["knee", "knob", "knock", "knit", "knot", "know", "knight", "kneel", "known"]`,
-      },
-      {
-        role: "user",
-        content: `Characters: ${characters}
+Output: ["knee", "knob", "knock", "knit", "knot", "know", "knight", "kneel", "known"]`;
+
+    input = `Characters: ${characters}
 Phonemes: ${phonemeSequence}
 Reading Grade Level: ${grade}
-Output:`,
-      },
-    ];
-
-    model = "gpt-4";
+Output:`;
   } else {
-    messages = [
-      {
-        role: "system",
-        content: `Output a JSON list of 9 new words at the appropriate reading grade level.
+    instructions = `Output a JSON list of 9 new words at the appropriate reading grade level.
 
 Use this format:
 
@@ -90,35 +78,32 @@ Output: ["balloon", "riding", ...]
 
 Reading Grade Level: 11
 Output: ["undulate", "articulate", ...]
-`,
-      },
-      {
-        role: "user",
-        content: `Reading Grade Level: ${grade}
-  Output:`,
-      },
-    ];
+`;
 
-    model = "gpt-3.5-turbo";
+    input = `Reading Grade Level: ${grade}
+  Output:`;
   }
 
-  console.log(messages);
-
-  const { data } = await openai.createChatCompletion({
+  const response = await openai.responses.create({
     model,
-    messages,
-    max_tokens: 1000,
+    instructions,
+    input,
+    max_output_tokens: 1000,
     temperature: 0.5,
-    top_p: 1,
-    presence_penalty: 0,
-    frequency_penalty: 0,
-    n: 1,
-    stream: false,
+    text: {
+      format: {
+        type: "json_schema",
+        name: "word_list",
+        schema: {
+          type: "array",
+          maxItems: 9,
+          items: { type: "string" },
+        },
+      },
+    },
   });
 
-  const responseJson = data.choices[0].message?.content;
-
-  console.log(responseJson);
+  const responseJson = response.output_text;
 
   if (!responseJson) {
     res.status(503).json({ error: "No response" });
